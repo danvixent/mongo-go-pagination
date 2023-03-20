@@ -240,9 +240,11 @@ func (paging *pagingQuery) Find() (paginatedData *PaginatedData, err error) {
 
 	// set options for sorting and skipping
 	skip := getSkip(paging.PageCount, paging.LimitCount)
+	v := true
 	opt := &options.FindOptions{
-		Skip:  &skip,
-		Limit: &paging.LimitCount,
+		Skip:         &skip,
+		Limit:        &paging.LimitCount,
+		AllowDiskUse: &v,
 	}
 	if paging.Project != nil {
 		opt.SetProjection(paging.Project)
